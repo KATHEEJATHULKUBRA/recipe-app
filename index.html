@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe App</title>
+    <link rel="website icon" href="/icon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: black;
+            color: purple;
+        }
+
+        .border {
+            border-bottom: 2px solid purple;
+            width: 180px;
+            border-radius: 10px;
+            height: 4px;
+            margin: auto;
+            margin-bottom: 15px;
+        }
+
+        footer h3 {
+            text-align: center;
+            color: gray;
+            font-size: 18px;
+            margin-bottom: 10px;
+
+        }
+
+
+        h1 {
+            text-align: center;
+        }
+
+        .recipe-container {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            text-align: left;
+
+        }
+
+        .recipe {
+            border: 2px solid purple;
+            border-radius: 10px;
+            padding: 20px;
+            background: black;
+            text-align: center;
+            margin: 10px 0;
+            color: gray;
+
+            width: calc(30% - 20px);
+            /* Adjust for spacing */
+            box-sizing: border-box;
+            /* Include padding/border in width */
+        }
+
+        .recipe img {
+
+            width: 230px;
+            height: 200px;
+
+            border-radius: 15px;
+            margin-right: 10px;
+        }
+
+        .recipe-info {
+            flex-grow: 1;
+        }
+
+        .button {
+            cursor: pointer;
+            background-color: purple;
+            color: lightgray;
+            font-weight: bold;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        .button:hover {
+            background-color: white;
+            color: purple;
+        }
+
+        .remove-button {
+            cursor: pointer;
+            border: 1px solid purple;
+            color: purple;
+            background-color: black;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-left: 10px;
+        }
+
+        .remove-button:hover {
+            color: black;
+            background-color: purple;
+        }
+
+        .favorites {
+
+            margin-top: 20px;
+            border-top: 5px solid purple;
+            padding-top: 10px;
+        }
+
+        #favorites li {
+            margin-bottom: 10px;
+            color: gray;
+            list-style: none;
+
+            /* Space between favorite items */
+
+        }
+
+        #favorites li:before {
+            content: "❤️";
+
+        }
+
+        #favorites li button {
+            margin-top: 5px;
+            /* Space between item text and remove button */
+        }
+
+        .search {
+            text-align: center;
+        }
+
+        .search input {
+            width: 60%;
+            padding: 5px 16px;
+            background: black;
+            border: 2px solid purple;
+            font-size: 20px;
+            color: gray;
+            text-transform: capitalize;
+
+            outline: none;
+        }
+
+        .search input::placeholder {
+            color: gray;
+            font-weight: 500;
+        }
+
+        .recipe h2 {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="color: purple;">Re<span style="color: aliceblue;">cipe</span> App</h1>
+    <div class="search">
+        <input type="text" name="" id="find" placeholder="search here...." onkeyup="search()">
+    </div>
+
+    <div class="favorites" id="favoritesList">
+        <h2 style="color: aliceblue;">Favo<span style="color: purple;">rites(❤️)</span></h2>
+        <ul id="favorites"></ul>
+    </div>
+
+    <div id="recipeList" class="recipe-container">
+        <div class="recipe">
+            <img src="/recipe 1.jpg" alt="Spaghetti Carbonara">
+            <div class="recipe-info">
+                <h2>Spaghetti Carbonara</h2>
+                <p>Ingredients: Spaghetti, eggs, cheese, pancetta, pepper.</p>
+                <button class="button" onclick="addToFavorites('Spaghetti Carbonara')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 2.jpg" alt="Chicken Curry">
+            <div class="recipe-info">
+                <h2>Chicken Curry</h2>
+                <p>Ingredients: Chicken, curry powder, coconut milk, garlic, onion.</p>
+                <button class="button" onclick="addToFavorites('Chicken Curry')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 3.jpg" alt="Pancakes">
+            <div class="recipe-info">
+                <h2>Pancakes</h2>
+                <p>Ingredients: Flour, eggs, milk, sugar, baking powder.</p>
+                <button class="button" onclick="addToFavorites('Pancakes')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 4.jpg" alt="Chocolate Cake">
+            <div class="recipe-info">
+                <h2>Chocolate Cake</h2>
+                <p>Ingredients: Flour, sugar, cocoa powder, eggs, butter.</p>
+                <button class="button" onclick="addToFavorites('Chocolate Cake')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 5.jpg" alt="Tacos">
+            <div class="recipe-info">
+                <h2>Tacos</h2>
+                <p>Ingredients: Tortillas, beef, cheese, lettuce, salsa.</p>
+                <button class="button" onclick="addToFavorites('Tacos')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 6.jpg" alt="Caesar Salad">
+            <div class="recipe-info">
+                <h2>Caesar Salad</h2>
+                <p>Ingredients: Romaine, croutons, parmesan, Caesar dressing.</p>
+                <button class="button" onclick="addToFavorites('Caesar Salad')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 7.jpg" alt="Beef Stroganoff">
+            <div class="recipe-info">
+                <h2>Beef Stroganoff</h2>
+                <p>Ingredients: Beef, mushrooms, onions, sour cream, egg noodles.</p>
+                <button class="button" onclick="addToFavorites('Beef Stroganoff')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 8.jpg" alt="Vegetable Stir Fry">
+            <div class="recipe-info">
+                <h2>Vegetable Stir Fry</h2>
+                <p>Ingredients: Mixed vegetables, soy sauce, garlic, ginger.</p>
+                <button class="button" onclick="addToFavorites('Vegetable Stir Fry')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 9.jpg" alt="Margarita Pizza">
+            <div class="recipe-info">
+                <h2>Margarita Pizza</h2>
+                <p>Ingredients: Pizza dough, tomatoes, mozzarella, basil.</p>
+                <button class="button" onclick="addToFavorites('Margarita Pizza')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 10.jpg" alt="Lentil Soup">
+            <div class="recipe-info">
+                <h2>Lentil Soup</h2>
+                <p>Ingredients: Lentils, carrots, onions, celery, spices.</p>
+                <button class="button" onclick="addToFavorites('Lentil Soup')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 11.jpg" alt="BBQ Ribs">
+            <div class="recipe-info">
+                <h2>BBQ Ribs</h2>
+                <p>Ingredients: Pork ribs, BBQ sauce, Eggs, spices.</p>
+                <button class="button" onclick="addToFavorites('BBQ Ribs')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 12.jpg" alt="Shrimp Scampi">
+            <div class="recipe-info">
+                <h2>Shrimp Scampi</h2>
+                <p>Ingredients: Shrimp, garlic, butter, lemon, pasta.</p>
+                <button class="button" onclick="addToFavorites('Shrimp Scampi')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 13.jpg" alt="Stuffed Peppers">
+            <div class="recipe-info">
+                <h2>Stuffed Peppers</h2>
+                <p>Ingredients: Bell peppers, rice, ground meat, spices.</p>
+                <button class="button" onclick="addToFavorites('Stuffed Peppers')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 14.jpg" alt="Baked Salmon">
+            <div class="recipe-info">
+                <h2>Baked Salmon</h2>
+                <p>Ingredients: Salmon, lemon, herbs, Eggs, garlic.</p>
+                <button class="button" onclick="addToFavorites('Baked Salmon')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 15.jpg" alt="Fried Rice">
+            <div class="recipe-info">
+                <h2>Fried Rice</h2>
+                <p>Ingredients: Rice, vegetables, eggs, soy sauce.</p>
+                <button class="button" onclick="addToFavorites('Fried Rice')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 16.jpg" alt="Chili">
+            <div class="recipe-info">
+                <h2>Chili</h2>
+                <p>Ingredients: Ground beef, beans, tomatoes, spices.</p>
+                <button class="button" onclick="addToFavorites('Chili')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 17.jpg" alt="Quiche">
+            <div class="recipe-info">
+                <h2>Quiche</h2>
+                <p>Ingredients: Eggs, cream, cheese, vegetables, pie crust.</p>
+                <button class="button" onclick="addToFavorites('Quiche')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 18.jpg" alt="Pesto Pasta">
+            <div class="recipe-info">
+                <h2>Pesto Pasta</h2>
+                <p>Ingredients: Pasta, basil pesto, parmesan, pine nuts.</p>
+                <button class="button" onclick="addToFavorites('Pesto Pasta')">Add to Favorites</button>
+            </div>
+        </div>
+        <div class="recipe">
+            <img src="/recipe 19.jpg" alt="Apple Pie">
+            <div class="recipe-info">
+                <h2>Apple Pie</h2>
+                <p>Ingredients: Apples, sugar, cinnamon, pie crust.</p>
+                <button class="button" onclick="addToFavorites('Apple Pie')">Add to Favorites</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="border"></div>
+        <h3>@ CopyRight. Designed by Katheejathul Kubra.v</h3>
+        <div class="border"></div>
+    </footer>
+
+
+    <script>
+        const favorites = [];
+
+        function addToFavorites(recipe) {
+            if (!favorites.includes(recipe)) {
+                favorites.push(recipe);
+                updateFavorites();
+            } else {
+                alert(`${recipe} is already in favorites!`);
+            }
+        }
+
+        function removeFromFavorites(recipe) {
+            const index = favorites.indexOf(recipe);
+            if (index > -1) {
+                favorites.splice(index, 1);
+                updateFavorites();
+            }
+        }
+
+        function updateFavorites() {
+            const favoritesList = document.getElementById('favorites');
+            favoritesList.innerHTML = ''; // Clear the list
+            favorites.forEach(recipe => {
+                const li = document.createElement('li');
+                li.textContent = recipe;
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.className = 'remove-button';
+                removeButton.onclick = () => removeFromFavorites(recipe);
+                li.appendChild(removeButton);
+                favoritesList.appendChild(li);
+            });
+        }
+
+        function search() {
+            let filter = document.getElementById('find').value.toUpperCase();
+            let items = document.querySelectorAll('.recipe');
+            for (let i = 0; i < items.length; i++) {
+                let h2Element = items[i].getElementsByTagName('h2')[0];
+                let value = h2Element.innerHTML || h2Element.innerText || h2Element.textContent;
+
+                if (value.toUpperCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>
